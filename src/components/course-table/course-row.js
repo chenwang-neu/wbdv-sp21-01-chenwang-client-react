@@ -50,5 +50,5 @@ const CourseRow = (
             </td>
         </tr>
     )
-}
+    }
 export default CourseRow

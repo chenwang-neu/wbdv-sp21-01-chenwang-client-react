@@ -22,7 +22,7 @@ const CourseCard = (
     }
 
     return(
-        <div className="col-4">
+        <div className="col-2">
             <div className="card">
                 <img src="https://www.valuecoders.com/blog/wp-content/uploads/2016/08/react.png" className="card-img-top"
                      alt="..."/>
