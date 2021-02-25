@@ -1,0 +1,42 @@
+.add-bottom-right{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index: 2;
+}
+
+.card-bottom-right{
+    position:absolute;
+    right:0;
+    bottom:0;
+    z-index: 1;
+}
+
+.card-top-right{
+    position:absolute;
+    right:0;
+    top:0;
+    z-index: 1;
+}
+
+.color-red{
+    color:red;
+}
+
+.color-green{
+    color:green;
+}
+
+.color-black{
+    color:black;
+}
+
+.card{
+    z-index: 0;
+}
+
+.nav-btn{
+    margin-left: auto;
+}
+
+

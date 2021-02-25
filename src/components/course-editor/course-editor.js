@@ -1,12 +1,17 @@
 import React from "react";
+import './editor.style.client.css';
 
 const CourseEditor =({history}) =>{
     return (
         <div className="container">
             <div className="wbdv-editor-header bgcolor-darkgrey">
-                <div className="col-4 wbdv-editor-title">
-                    <i onClick={() => history.goBack()} className="p-2 fas fa-times">
-                        Web Dev Selected Course</i>
+                <div className="row">
+                    <div className="col-1 wbdv-editor-title">
+                        <i onClick={() => history.goBack()} className="p-4 fas fa-times"/>
+                    </div>
+                    <div className="col-5 wbdv-editor-title">
+                        Web Dev Selected Course
+                    </div>
                 </div>
                 <div className="row">
                     <div className="col-8">
@@ -35,25 +40,25 @@ const CourseEditor =({history}) =>{
                 <div className="col-4 bgcolor-black">
                     <ul className="list-group">
                         <br/>
-                        <span className="p-2 btn btn-block bgcolor-darkgrey color-white">Module 1 - jQuery
+                        <span className="p-2 btn btn-block btn-secondary color-white">Module 1 - jQuery
                         <i className="p-2 fas fa-times float-right color-white"/>
                         </span>
                         <span className="p-2 btn btn-block btn-primary color-white">Module 2 - React
                         <i className="p-2 fas fa-times float-right color-white"/>
                         </span>
-                        <span className="p-2 btn btn-block bgcolor-darkgrey color-white">Module 3 - Redux
+                        <span className="p-2 btn btn-block btn-secondary color-white">Module 3 - Redux
                         <i className="p-2 fas fa-times float-right color-white"/>
                         </span>
-                        <span className="p-2 btn btn-block bgcolor-darkgrey color-white">Module 4 - Native
+                        <span className="p-2 btn btn-block btn-secondary color-white">Module 4 - Native
                         <i className="p-2 fas fa-times float-right color-white"/>
                         </span>
-                        <span className="p-2 btn btn-block bgcolor-darkgrey color-white">Module 5 - Angular
+                        <span className="p-2 btn btn-block btn-secondary color-white">Module 5 - Angular
                         <i className="p-2 fas fa-times float-right color-white"/>
                         </span>
-                        <span className="p-2 btn btn-block bgcolor-darkgrey color-white">Module 6 - Node
+                        <span className="p-2 btn btn-block btn-secondary color-white">Module 6 - Node
                         <i className="p-2 fas fa-times float-right color-white"/>
                         </span>
-                        <span className="p-2 btn btn-block bgcolor-darkgrey color-white">Module 7 - Mongo
+                        <span className="p-2 btn btn-block btn-secondary color-white">Module 7 - Mongo
                         <i className="p-2 fas fa-times float-right color-white"/>
                         </span>
                         <div className="col-13">

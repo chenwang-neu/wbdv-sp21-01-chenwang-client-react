@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import {Link} from "react-router-dom";
+import '../components.style.client.css';
 
 const CourseCard = (
     {
@@ -8,7 +9,6 @@ const CourseCard = (
         course,
         title,
     }) => {
-
     const [editing, setEditing] = useState(false)
     const [newTitle, setNewTitle] = useState(title)
 
@@ -22,16 +22,14 @@ const CourseCard = (
     }
 
     return(
-        <div className="col-2">
+        <div className="col">
             <div className="card">
-                <img src="https://www.valuecoders.com/blog/wp-content/uploads/2016/08/react.png" className="card-img-top"
+                <img src="https://www.valuecoders.com/blog/wp-content/uploads/2016/08/react.png"
+                     className="card-img-top"
                      alt="..."/>
                 <div className="card-body">
                     {
-                        !editing &&
-                        <Link to="/courses/editor">
-                            {title}
-                        </Link>
+                        !editing && <p>{title}</p>
                     }
                     {
                         editing &&
@@ -41,19 +39,20 @@ const CourseCard = (
                             className="form-control"/>
                     }
                     <p className="card-text">Some description.</p>
-                    <Link to="/courses/editor" className="btn btn-primary">
+                    <Link to="/courses/editor" className="btn btn-primary btn-block">
                         {course.title}
                     </Link>
-                    {editing && <i onClick={() => deleteCourse(course)} className="fas fa-times"/>}
                     <Link to="#">
-                        {!editing && <i onClick={() => setEditing(true)} className="fas fa-edit"/>}
+                        {!editing && <i onClick={() => setEditing(true)} className="p-2 fas fa-edit card-bottom-right"/>}
                     </Link>
-                    {editing && <i onClick={() => saveTitle()} className="fas fa-check"/>}
+                    <div className="card-top-right">
+                        {editing && <i onClick={() => saveTitle()} className="p-2 fas fa-check color-green"/>}
+                        {editing && <i onClick={() => deleteCourse(course)} className="p-2 fas fa-times color-red"/>}
+                    </div>
                 </div>
             </div>
         </div>
     )
-
 
 }
 export default CourseCard
