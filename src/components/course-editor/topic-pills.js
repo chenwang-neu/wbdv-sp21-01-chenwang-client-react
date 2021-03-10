@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import EditableItem from "../editable-item";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import topicsService from "../../services/topic-service"
+import "../components.style.client.css"
 
 const TopicPills = (
     {
@@ -12,29 +13,29 @@ const TopicPills = (
         updateTopic,
         findTopicsForLesson
     }) => {
-    const {layout, courseId, moduleId, lessonId} = useParams();
+    const {layout, courseId, moduleId, lessonId, topicId} = useParams();
     useEffect(() => {
         findTopicsForLesson(lessonId)
     }, [moduleId, lessonId])
-    return (<div className="col-8 mda-page-background">
-        <ul className="nav nav-pills justify-content-end pills-section-underlined">
+    return (<div className="col-8">
+        <ul className="nav nav-pills justify-content-end">
             {
                 topics.map(topic =>
-                    <li className='nav-item'>
-                        <a className="nav-link" href="#">
-                            <EditableItem
-                                to={`/courses/${layout}/edit/${courseId}/${moduleId}/${lessonId}/${topic._id}`}
-                                key={topic._id}
-                                item={topic}
-                                deleteItem={deleteTopic}
-                                updateItem={updateTopic}>
-                            </EditableItem>
-                        </a>
+                    <li className="nav-item">
+                        <EditableItem
+                            to={`/courses/${layout}/edit/${courseId}/${moduleId}/${lessonId}/${topic._id}`}
+                            key={topic._id}
+                            item={topic}
+                            active={topicId === topic._id}
+                            deleteItem={deleteTopic}
+                            updateItem={updateTopic}>
+                        </EditableItem>
                     </li>
                 )
             }
-            <li className='nav-item'>
-                <i onClick={() => createTopic(lessonId)} className='fas fa-plus-circle'/>
+            <li className="nav-item text-primary">
+                <i className="wbdv-icon fas fa-plus d-flex justify-content-center"
+                   onClick={() => createTopic(lessonId)}/>
             </li>
         </ul>
     </div>)
@@ -49,10 +50,10 @@ const stpm = (state) => {
 const dtpm = (dispatch) => ({
     createTopic: (lessonId) => {
         topicsService.createTopic(lessonId, {title: "New Topic"})
-            .then(topicFromServer =>
+            .then(actualTopic =>
                 dispatch({
-                    type: 'CREATE_TOPIC',
-                    topic: topicFromServer
+                    type: "CREATE_TOPIC",
+                    topic: actualTopic
                 }))
     },
     findTopicsForLesson: (lessonId) => {
@@ -65,7 +66,7 @@ const dtpm = (dispatch) => ({
     deleteTopic: (item) => {
         topicsService.deleteTopic(item._id)
             .then(status => dispatch({
-                type: 'DELETE_TOPIC',
+                type: "DELETE_TOPIC",
                 topicToDelete: item
             }))
     },
@@ -73,7 +74,7 @@ const dtpm = (dispatch) => ({
     updateTopic: (topic) => {
         topicsService.updateTopic(topic._id, topic)
             .then(status => dispatch({
-                type: 'UPDATE_TOPIC',
+                type: "UPDATE_TOPIC",
                 topic
             }))
     }

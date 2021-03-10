@@ -20,7 +20,7 @@ const reducer = combineReducers({
 const store = createStore(reducer)
 
 const CourseEditor = () => {
-    const {layout, courseId, moduleId} = useParams();
+    const {layout, courseId} = useParams();
     const [title, setTitle] = useState("")
 
      useEffect(() => {
@@ -32,11 +32,11 @@ const CourseEditor = () => {
             <div className="container">
                 <div className="row">
                     <Link to={`/courses/${layout}`}>
-                        <i className="p-4 fas fa-2x fa-times"/>
+                        <i className="p-1 fas fa-2x fa-times"/>
                     </Link>
                     <h2>CourseEditor
                         <br/>
-                        <h3>{title}</h3>
+                        <h3>WebDev - {title}</h3>
                     </h2>
                 </div>
                 <div className="row">
@@ -45,6 +45,7 @@ const CourseEditor = () => {
                     </div>
                     <div className="col-8">
                         <LessonTabs/>
+                        <br/>
                         <TopicPills/>
                     </div>
                 </div>

@@ -32,7 +32,10 @@ const ModuleList = (
                         </li>
                     )
                 }
-                <i onClick={() => createModule(courseId)} className='fas fa-2x fa-plus-circle'/>
+                <div className="list-group-item text-primary">
+                    <i className="fas fa-plus d-flex justify-content-center"
+                       onClick={() => createModule(moduleId)}/>
+                </div>
             </ul>
         </div>)
 }
@@ -47,10 +50,10 @@ const dtpm = (dispatch) => {
     return {
         createModule: (courseId) => {
             moduleService.createModule(courseId, {title: "New Module"})
-                .then(moduleFromServer =>
+                .then(actualModule =>
                     dispatch({
-                        type: 'CREATE_MODULE',
-                        module: moduleFromServer
+                        type: "CREATE_MODULE",
+                        module: actualModule
                     }))
         },
         findModulesForCourse: (courseId) => {
@@ -63,14 +66,14 @@ const dtpm = (dispatch) => {
         deleteModule: (item) => {
             moduleService.deleteModule(item._id)
                 .then(status => dispatch({
-                    type: 'DELETE_MODULE',
+                    type: "DELETE_MODULE",
                     moduleToDelete: item
                 }))
         },
         updateModule: (module) => {
             moduleService.updateModule(module._id, module)
                 .then(status => dispatch({
-                    type: 'UPDATE_MODULE',
+                    type: "UPDATE_MODULE",
                     module
                 }))
         }

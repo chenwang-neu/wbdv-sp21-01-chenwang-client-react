@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
+import "./components.style.client.css"
 
 const EditableItem = (
     {
@@ -19,33 +20,29 @@ const EditableItem = (
             {
                 !editing &&
                 <>
-                    <div className="row">
-                        <Link className={`nav-link ${active ? 'active' : ''}`} to={to}>
-                            {item.title} {JSON.stringify(active)}
-                        </Link>
+                    <Link className={`nav-link ${active ? 'active' : ''}`} to={to}>
+                        {item.title}
                         <i onClick={() =>
                             setEditing(true)
-                        } className='p-2 fas fa-edit float-right'/>
-                    </div>
+                        } className="p-1 fas fa-edit float-right"/>
+                    </Link>
                 </>
             }
             {
                 editing &&
                 <>
-                    <div className="row">
-                        <input
-                            onChange={(e) =>
-                                setCachedItem({
-                                    ...cachedItem,
-                                    title: e.target.value
-                                })}
-                            value={cachedItem.title}/>
-                        <i onClick={() => {
-                            setEditing(false)
-                            updateItem(cachedItem)
-                        }} className='fas fa-check float-right'/>
-                        <i onClick={() => deleteItem(item)} className='fas fa-times float-right'/>
-                    </div>
+                    <input
+                        onChange={(e) =>
+                            setCachedItem({
+                                ...cachedItem,
+                                title: e.target.value
+                            })}
+                        value={cachedItem.title}/>
+                    <i onClick={() => {
+                        setEditing(false)
+                        updateItem(cachedItem)
+                    }} className="p-1 fas fa-check"/>
+                    <i onClick={() => deleteItem(item)} className="p-1 fas fa-times"/>
                 </>
             }
         </>

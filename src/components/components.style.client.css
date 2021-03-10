@@ -39,4 +39,11 @@
     margin-left: auto;
 }
 
+.list-group-item.active a {
+    color: white;
+}
+
+.wbdv-icon{
+    margin-top: 10px;
+}
 
