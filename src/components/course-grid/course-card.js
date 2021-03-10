@@ -39,7 +39,7 @@ const CourseCard = (
                             className="form-control"/>
                     }
                     <p className="card-text">Some description.</p>
-                    <Link to="/courses/editor" className="btn btn-primary btn-block">
+                    <Link to={`/courses/grid/edit/${course._id}`} className="btn btn-primary btn-block">
                         {course.title}
                     </Link>
                     <Link to="#">

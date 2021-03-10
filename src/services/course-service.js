@@ -34,6 +34,7 @@ export const updateCourse = (courseId, course) =>
         .then(response => response.json())
 
 export default {
+    findCourseById,
     findAllCourses,
     deleteCourse,
     createCourse,
