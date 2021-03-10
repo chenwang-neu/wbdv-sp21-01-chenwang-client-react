@@ -32,7 +32,7 @@ const CourseEditor = () => {
             <div className="container">
                 <div className="row">
                     <Link to={`/courses/${layout}`}>
-                        <i className="p-1 fas fa-2x fa-times"/>
+                        <i className="p-4 fas fa-2x fa-times"/>
                     </Link>
                     <h2>CourseEditor
                         <br/>
