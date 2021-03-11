@@ -16,7 +16,7 @@ const TopicPills = (
     const {layout, courseId, moduleId, lessonId, topicId} = useParams();
     useEffect(() => {
         findTopicsForLesson(lessonId)
-    }, [moduleId, lessonId])
+    }, [lessonId, moduleId])
     return (<div className="col-8">
         <ul className="nav nav-pills justify-content-end">
             {

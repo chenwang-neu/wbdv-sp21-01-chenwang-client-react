@@ -15,7 +15,7 @@ const ModuleList = (
     const {layout, courseId, moduleId} = useParams();
     useEffect(() => {
         findModulesForCourse(courseId)
-    }, [])
+    }, [courseId])
     return (
         <div className="col">
             <ul className="modules-list-group">
@@ -34,7 +34,7 @@ const ModuleList = (
                 }
                 <div className="list-group-item text-primary">
                     <i className="fas fa-plus d-flex justify-content-center"
-                       onClick={() => createModule(moduleId)}/>
+                       onClick={() => createModule(courseId)}/>
                 </div>
             </ul>
         </div>)
