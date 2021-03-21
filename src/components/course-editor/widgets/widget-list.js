@@ -30,17 +30,18 @@ const WidgetList = (
                             {
                                 widget.type === "HEADING" &&
                                 <HeadingWidget
-                                    editing={editingWidget.id === widget.id}
                                     widget={widget}
-                                    updateItem = {updateWidget}
-                                    deleteItem = {deleteWidget}
+                                    updateWidget = {updateWidget}
+                                    deleteWidget = {deleteWidget}
                                 />
                             }
                             {
                                 widget.type === "PARAGRAPH" &&
                                 <ParagraphWidget
-                                    editing={editingWidget.id === widget.id}
-                                    widget={widget}/>
+                                    widget={widget}
+                                    updateWidget = {updateWidget}
+                                    deleteWidget = {deleteWidget}
+                                    />
                             }
                         </li>
                     )
