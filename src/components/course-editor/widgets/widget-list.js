@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
+import widgetService from "../../../services/widget-service";
 import {useParams} from "react-router-dom";
 
 const WidgetList = (
