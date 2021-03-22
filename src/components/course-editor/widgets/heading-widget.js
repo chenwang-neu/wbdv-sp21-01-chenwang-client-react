@@ -1,41 +1,56 @@
 import React,{useState} from 'react'
 
 const HeadingWidget = ({widget, updateWidget, deleteWidget}) => {
-    const [editingWidget, setEditingWidget] = useState({});
+    const [editing, setEditing] = useState(false);
     const [widgetCache, setWidgetCache] = useState(widget);
 
     return(
         <>
             {
-                editingWidget.id === widget.id &&
-                <>
+                editing &&
+                <div>
                     <i onClick={() => {
-                        updateWidget(widgetCache)
-                        setEditingWidget({})
+                        updateWidget(widget.id, widgetCache)
+                        setEditing(false)
                     }} className="fas fa-2x fa-check float-right"/>
                     <i onClick={() => deleteWidget(widget)} className="fas fa-2x fa-trash float-right"/>
-                </>
+                <select className="col form-control"
+                    value ={widgetCache.type}
+                    onChange={(e) =>
+                        setWidgetCache({...widgetCache, type: e.target.value
+                    })}>
+                    <option value={"HEADING"}>Heading</option>
+                    <option value={"PARAGRAPH"}>Paragraph</option>
+                    <option value={"VIDEO"}>Video</option>
+                    <option value={"IMAGE"}>Image</option>
+                    <option value={"LINK"}>Link</option>
+                    <option value={"LIST"}>List</option>
+                    <option value={"HTML"}>HTML</option>
+                </select>
+                <br/>
+                <input className="col form-control"
+                    value={widgetCache.text}
+                    onChange={(e) =>
+                    setWidgetCache({...widgetCache, text: e.target.value})
+                }/>
+                <br/>
+                <select className="col form-control"
+                    value={widgetCache.size}
+                    onChange={(e) => setWidgetCache({
+                        ...widgetCache, size: e.target.value
+                    })
+                }>
+                    <option value={1}>Heading 1</option>
+                    <option value={2}>Heading 2</option>
+                    <option value={3}>Heading 3</option>
+                    <option value={4}>Heading 4</option>
+                    <option value={5}>Heading 5</option>
+                    <option value={6}>Heading 6</option>
+                </select>
+                </div>
             }
             {
-                editingWidget.id !== widget.id &&
-                <i onClick={() => setEditingWidget(widget)} className="fas fa-2x fa-cog float-right"/>
-            }
-            {
-                editingWidget.id === widget.id &&
-                <>
-                    <input value={widget.text} className="form-control"/>
-                    <select value={widget.size} className="form-control">
-                        <option value={1}>Heading 1</option>
-                        <option value={2}>Heading 2</option>
-                        <option value={3}>Heading 3</option>
-                        <option value={4}>Heading 4</option>
-                        <option value={5}>Heading 5</option>
-                        <option value={6}>Heading 6</option>
-                    </select>
-                </>
-            }
-            {
-                editingWidget.id !== widget.id &&
+                !editing &&
                 <>
                     {widget.size === 1 && <h1>{widget.text}</h1>}
                     {widget.size === 2 && <h2>{widget.text}</h2>}

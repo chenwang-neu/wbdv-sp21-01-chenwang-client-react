@@ -1,50 +1,44 @@
-const initialState ={
-    widgets:[
+const initialState = {
+    widgets: [
     ]
 }
 
-const widgetReducer =(state=initialState,action)=>{
-    switch (action.type){
-        case 'FIND_WIDGET':
+const widgetReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case "CREATE_WIDGET":
             return {
                 ...state,
-                widgets:action.widgets
-            }
-
-        case 'CREATE_WIDGET':
-            return {
-                ...state,
-                widgets:[
+                widgets: [
                     ...state.widgets,
                     action.widget
                 ]
             }
-        case 'DELETE_WIDGET':
-            const newState1={
-                widgets:state.widgets.filter(widget=>{
-                    if(widget.id===action.widgetToDelete.id){
-                        return false
-                    }else{
-                        return true
-                    }
+        case "DELETE_WIDGET":
+            return {
+                ...state,
+                widgets: state.widgets.filter(widget => {
+                    return widget.id !== action.widgetToDelete.id
                 })
             }
-            return newState1
-
-        case 'UPDATE_WIDGET':
-            return{
-                widgets:state.widgets.map(t=>{
-                    if(t.id===action.widget.id){
-                        return action.widget
-                    }else{
-                        return t
+        case "UPDATE_WIDGET":
+            return {
+                ...state,
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.updateWidget.id) {
+                        return action.updateWidget
+                    } else {
+                        return widget
                     }
                 })
             }
 
+        case "FIND_WIDGETS_FOR_TOPIC":
+            return {
+                ...state,
+                widgets: action.widgets
+            }
         default:
             return state
-
     }
 }
 

@@ -17,7 +17,7 @@ const LessonTabs = (
     useEffect(() => {
         findLessonsForModule(moduleId)
     }, [moduleId])
-    return (<div className="col-8">
+    return (<div className="col">
         <ul className="nav nav-tabs justify-content-end">
             {
                 lessons.map(lesson =>

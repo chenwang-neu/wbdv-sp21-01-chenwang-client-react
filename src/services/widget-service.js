@@ -1,6 +1,3 @@
-const LESSONS_URL = 'https://wbdv-generic-server.herokuapp.com/api/001051413/lessons';
-const TOPICS_URL = 'https://wbdv-generic-server.herokuapp.com/api/001051413/topics';
-
 export const createWidget = (topicId, widget) =>
     fetch(`http://localhost:8080/api/topics/${topicId}/widgets`, {
         method: "POST",

@@ -11,18 +11,19 @@ const WidgetList = (
         createWidget,
         deleteWidget,
         updateWidget,
-        findWidgetForTopic
+        findWidgetsForTopic
 
     }) => {
     const {layout,courseId,moduleId,lessonId,topicId} = useParams()
     const [editingWidget, setEditingWidget] = useState({});
 
     useEffect(() => {
-        findWidgetForTopic(topicId)
-    }, [topicId])
+        findWidgetsForTopic(topicId)
+    }, [findWidgetsForTopic, topicId])
 
     return(
         <div>
+            {JSON.stringify(widgets)}
             <i onClick={()=> createWidget(topicId)} className="fas fa-plus fa-2x float-right"/>
             <ul className="list-group">
                 {
@@ -59,15 +60,15 @@ const stpm =(state)=>{
 }
 
 const dtpm =(dispatch)=>({
-    findWidgetForTopic:(topicId)=>{
-        widgetService.findWidgetForTopic(topicId)
+    findWidgetsForTopic:(topicId)=>{
+        widgetService.findWidgetsForTopic(topicId)
             .then(widgets=> dispatch({
                 type:'FIND_WIDGET',
                 widgets
             }))
     },
 
-    createWidgetForTopic:(topicId)=>{
+    createWidget:(topicId)=>{
         widgetService.createWidget(topicId)
             .then(widget => dispatch({
                 type:'CREATE_WIDGET',
