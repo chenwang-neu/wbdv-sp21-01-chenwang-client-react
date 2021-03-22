@@ -63,21 +63,21 @@ const dtpm = (dispatch) => ({
         widgetService.findWidgetsForTopic(topicId)
             .then(widgets => dispatch({
                 type: "FIND_ALL_WIDGETS_FOR_TOPIC",
-                widgets
+                widgets: widgets
             }))
     },
     createWidget: (topicId) => {
         widgetService.createWidget(topicId, {type: "HEADING", size: 1, text: "New Widget"})
             .then(widget => dispatch({
                 type: "CREATE_WIDGET",
-                widget
+                widget: widget
             }))
     },
     updateWidget: (widget) => {
         widgetService.updateWidget(widget.id, widget)
             .then(status => dispatch({
                 type: "UPDATE_WIDGET",
-                widget
+                updateWidget: widget
             }))
     },
     deleteWidget: (widget) => {
