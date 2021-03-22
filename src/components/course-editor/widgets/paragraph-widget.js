@@ -1,34 +1,25 @@
 import React,{useState} from 'react'
 
-const ParagraphWidget = ({widget, updateWidget, deleteWidget}) => {
-    const [editing, setEditing] = useState(false);
+const ParagraphWidget = ({widget, widgetToUpdate, widgetToDelete}) => {
+    const [editingWidget, setEditingWidget] = useState({});
     const [widgetCache, setWidgetCache] = useState(widget);
-
     return(
         <>
             {
-                editing &&
+                editingWidget.id === widget.id &&
                 <>
-                    <i className="fas fa-check float-right"
-                       onClick={() => {
-                           updateWidget(widget.id, widgetCache)
-                           setEditing(false)
-                       }
-                       }/>
-                    <i className="fas fa-trash float-right"
-                       onClick={() => {
-                           deleteWidget(widget.id)
-                           setEditing(false)
-                       }
-                       }/>
-                    <select className="col form-control"
-                            value ={widgetCache.type}
-                            onChange={(e) =>
-                                setWidgetCache({
-                                    ...widgetCache,
-                                    type: e.target.value
-                                })
-                            }>
+                    <i onClick={() => {
+                        widgetToUpdate(widgetCache)
+                        setEditingWidget({})
+                    }} className="fas fa-2x fa-check float-right"/>
+                    <i onClick={() => widgetToDelete(widget)} className="fas fa-2x fa-trash float-right"/>
+                </>
+            }
+            {
+                (editingWidget.id === widget.id) &&
+                <>
+                    <select onChange={(e) =>
+                        setWidgetCache({...widgetCache, type: e.target.value})} value={widgetCache.type} className="form-control">
                         <option value={"HEADING"}>Heading</option>
                         <option value={"PARAGRAPH"}>Paragraph</option>
                         <option value={"VIDEO"} disabled>Video</option>
@@ -37,19 +28,18 @@ const ParagraphWidget = ({widget, updateWidget, deleteWidget}) => {
                         <option value={"LIST"} disabled>List</option>
                         <option value={"HTML"} disabled>HTML</option>
                     </select>
-                    <br/>
-                    <textarea className="form-control" onChange={(e) =>
-                        setWidgetCache({
-                        ...widgetCache, text: e.target.value})} value={widgetCache.text}/>
+                    <textarea onChange={(e) =>
+                        setWidgetCache({...widgetCache, text: e.target.value})} value={widgetCache.text} className="form-control"/>
                 </>
             }
             {
-                !editing &&
+                editingWidget.id !== widget.id &&
+                <i onClick={() => setEditingWidget(widget)} className="fas fa-2x fa-cog float-right"/>
+            }
+            {
+                (editingWidget.id !== widget.id) &&
                 <p>
-                    <i className="fas fa-cog float-right"
-                       onClick={() => setEditing(true)}>
-                    </i>
-                    {widgetCache.text}
+                    {widget.text}
                 </p>
             }
         </>

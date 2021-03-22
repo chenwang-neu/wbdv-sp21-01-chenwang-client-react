@@ -23,7 +23,6 @@ const WidgetList = (
 
     return(
         <div>
-            {JSON.stringify(widgets)}
             <i onClick={()=> createWidget(topicId)} className="fas fa-plus fa-2x float-right"/>
             <ul className="list-group">
                 {
@@ -33,16 +32,16 @@ const WidgetList = (
                                 widget.type === "HEADING" &&
                                 <HeadingWidget
                                     widget={widget}
-                                    updateWidget = {updateWidget}
-                                    deleteWidget = {deleteWidget}
+                                    widgetToUpdate = {updateWidget}
+                                    widgetToDelete = {deleteWidget}
                                 />
                             }
                             {
                                 widget.type === "PARAGRAPH" &&
                                 <ParagraphWidget
                                     widget={widget}
-                                    updateWidget = {updateWidget}
-                                    deleteWidget = {deleteWidget}
+                                    widgetToUpdate = {updateWidget}
+                                    widgetToDelete = {deleteWidget}
                                 />
                             }
                         </li>
@@ -59,36 +58,33 @@ const stpm =(state)=>{
     }
 }
 
-const dtpm =(dispatch)=>({
-    findWidgetsForTopic:(topicId)=>{
+const dtpm = (dispatch) => ({
+    findWidgetsForTopic: (topicId) => {
         widgetService.findWidgetsForTopic(topicId)
-            .then(widgets=> dispatch({
-                type:'FIND_ALL_WIDGETS_FOR_TOPIC',
+            .then(widgets => dispatch({
+                type: "FIND_ALL_WIDGETS_FOR_TOPIC",
                 widgets
             }))
     },
-
-    createWidget:(topicId)=>{
+    createWidget: (topicId) => {
         widgetService.createWidget(topicId, {type: "HEADING", size: 1, text: "New Widget"})
             .then(widget => dispatch({
-                type:'CREATE_WIDGET',
+                type: "CREATE_WIDGET",
                 widget
             }))
     },
-
-    updateWidgetForTopic: (widget) =>{
-        widgetService.updateWidget(widget.id,widget)
-            .then(status =>dispatch({
-                type:'UPDATE_WIDGET',
+    updateWidget: (widget) => {
+        widgetService.updateWidget(widget.id, widget)
+            .then(status => dispatch({
+                type: "UPDATE_WIDGET",
                 widget
             }))
     },
-
-    deleteWidgetForTopic: (widget) =>{
+    deleteWidget: (widget) => {
         widgetService.deleteWidget(widget.id)
-            .then(status=>dispatch({
-                type:'DELETE_WIDGET',
-                widgetToDelete:widget
+            .then(status => dispatch({
+                type: "DELETE_WIDGET",
+                widgetToDelete: widget
             }))
     }
 })

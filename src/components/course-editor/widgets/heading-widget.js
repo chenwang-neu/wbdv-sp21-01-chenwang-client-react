@@ -1,19 +1,19 @@
-import React,{useState} from 'react'
+import React, {useState} from 'react'
 
-const HeadingWidget = ({widget, updateWidget, deleteWidget}) => {
-    const [editing, setEditing] = useState(false);
+const HeadingWidget = ({widget, widgetToUpdate, widgetToDelete}) => {
+    const [editingWidget, setEditingWidget] = useState({});
     const [widgetCache, setWidgetCache] = useState(widget);
 
     return(
         <>
             {
-                editing &&
+                editingWidget.id === widget.id &&
                 <div>
                     <i onClick={() => {
-                        updateWidget(widget.id, widgetCache)
-                        setEditing(false)
+                        widgetToUpdate( widgetCache)
+                        setEditingWidget({})
                     }} className="fas fa-2x fa-check float-right"/>
-                    <i onClick={() => deleteWidget(widget)} className="fas fa-2x fa-trash float-right"/>
+                    <i onClick={() => widgetToDelete(widget)} className="fas fa-2x fa-trash float-right"/>
                     <select className="col form-control"
                             value ={widgetCache.type}
                             onChange={(e) =>
@@ -36,10 +36,9 @@ const HeadingWidget = ({widget, updateWidget, deleteWidget}) => {
                     <br/>
                     <select className="col form-control"
                             value={widgetCache.size}
-                            onChange={(e) => setWidgetCache({
-                                ...widgetCache, size: e.target.value
-                            })
-                            }>
+                            onChange={(e) =>
+                                setWidgetCache({...widgetCache, size: parseInt(e.target.value)})}
+                            >
                         <option value={1}>Heading 1</option>
                         <option value={2}>Heading 2</option>
                         <option value={3}>Heading 3</option>
@@ -50,9 +49,12 @@ const HeadingWidget = ({widget, updateWidget, deleteWidget}) => {
                 </div>
             }
             {
-                !editing &&
+                editingWidget.id !== widget.id &&
+                <i onClick={() => setEditingWidget(widget)} className="fas fa-2x fa-cog float-right"/>
+            }
+            {
+                editingWidget.id !== widget.id &&
                 <>
-                    <i onClick={() => setWidgetCache(widget)} className="fas fa-cog float-right"/>
                     {widget.size === 1 && <h1>{widget.text}</h1>}
                     {widget.size === 2 && <h2>{widget.text}</h2>}
                     {widget.size === 3 && <h3>{widget.text}</h3>}
