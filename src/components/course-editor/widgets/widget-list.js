@@ -43,7 +43,7 @@ const WidgetList = (
                                     widget={widget}
                                     updateWidget = {updateWidget}
                                     deleteWidget = {deleteWidget}
-                                    />
+                                />
                             }
                         </li>
                     )
@@ -63,13 +63,13 @@ const dtpm =(dispatch)=>({
     findWidgetsForTopic:(topicId)=>{
         widgetService.findWidgetsForTopic(topicId)
             .then(widgets=> dispatch({
-                type:'FIND_WIDGET',
+                type:'FIND_ALL_WIDGETS_FOR_TOPIC',
                 widgets
             }))
     },
 
     createWidget:(topicId)=>{
-        widgetService.createWidget(topicId)
+        widgetService.createWidget(topicId, {type: "HEADING", size: 1, text: "New Widget"})
             .then(widget => dispatch({
                 type:'CREATE_WIDGET',
                 widget
