@@ -1,5 +1,7 @@
+const WIDGET_URL = 'https://wbdv-sp21-01-chenwang-server.herokuapp.com/api';
+
 export const createWidget = (topicId, widget) =>
-    fetch(`http://localhost:8080/api/topics/${topicId}/widgets`, {
+    fetch(`${WIDGET_URL}/topics/${topicId}/widgets`, {
         method: "POST",
         body: JSON.stringify(widget),
         headers: {
@@ -9,7 +11,7 @@ export const createWidget = (topicId, widget) =>
         .then(response => response.json());
 
 export const updateWidget = (wid, widget) =>
-    fetch(`http://localhost:8080/api/widgets/${wid}`, {
+    fetch(`${WIDGET_URL}/widgets/${wid}`, {
         method: "PUT",
         body: JSON.stringify(widget),
         headers: {
@@ -19,11 +21,11 @@ export const updateWidget = (wid, widget) =>
         .then(response => response.json());
 
 export const findWidgetsForTopic = (topicId) =>
-    fetch(`http://localhost:8080/api/topics/${topicId}/widgets`)
+    fetch(`${WIDGET_URL}/${topicId}/widgets`)
         .then(response => response.json())
 
 export const deleteWidget = (wid) =>
-    fetch(`http://localhost:8080/api/widgets/${wid}`, {
+    fetch(`${WIDGET_URL}/widgets/${wid}`, {
         method: "DELETE",
     }).then(response => response.json());
 
