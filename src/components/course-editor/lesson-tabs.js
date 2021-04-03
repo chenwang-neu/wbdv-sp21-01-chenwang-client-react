@@ -14,9 +14,13 @@ const LessonTabs = (
         findLessonsForModule
     }) => {
     const {layout,courseId, moduleId, lessonId} = useParams();
+
     useEffect(() => {
-        findLessonsForModule(moduleId)
-    }, [moduleId])
+        if (moduleId !== 'undefined' && typeof moduleId !== 'undefined') {
+            findLessonsForModule(moduleId)
+        }
+    }, [moduleId, lessonId, findLessonsForModule])
+
     return (<div className="col">
         <ul className="nav nav-tabs justify-content-end">
             {

@@ -1,5 +1,5 @@
-const MODULES_URL = 'https://wbdv-generic-server.herokuapp.com/api/001051413/modules';
-const LESSONS_URL = 'https://wbdv-generic-server.herokuapp.com/api/001051413/lessons';
+const MODULES_URL = 'https://wbdv-generic-server.herokuapp.com/api/chenwang-neu/modules';
+const LESSONS_URL = 'https://wbdv-generic-server.herokuapp.com/api/chenwang-neu/lessons';
 
 export const createLesson = (moduleId, lesson) =>
     fetch(`${MODULES_URL}/${moduleId}/lessons`, {
@@ -11,11 +11,9 @@ export const createLesson = (moduleId, lesson) =>
     })
         .then(response => response.json())
 
-
 export const findLessonsForModule = (moduleId) =>
     fetch(`${MODULES_URL}/${moduleId}/lessons`)
         .then(response => response.json())
-
 
 export const updateLesson = (lessonId, lesson) =>
     fetch(`${LESSONS_URL}/${lessonId}`, {
