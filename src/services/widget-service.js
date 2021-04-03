@@ -1,4 +1,5 @@
-const WIDGET_URL = 'https://wbdv-sp21-01-chenwang-server.herokuapp.com/api';
+//const WIDGET_URL = 'https://wbdv-sp21-01-chenwang-server.herokuapp.com/api';
+const WIDGET_URL = 'http://localhost:8080/api'
 
 export const createWidget = (topicId, widget) =>
     fetch(`${WIDGET_URL}/topics/${topicId}/widgets`, {

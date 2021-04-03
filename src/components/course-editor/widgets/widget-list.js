@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
+import ListWidget from "./list-widget";
+import ImageWidget from "./image-widget";
 import widgetService from "../../../services/widget-service";
 import {useParams} from "react-router-dom";
 
@@ -15,7 +17,7 @@ const WidgetList = (
 
     }) => {
     const {layout,courseId,moduleId,lessonId,topicId} = useParams()
-    const [editingWidget, setEditingWidget] = useState({});
+    //const [editingWidget, setEditingWidget] = useState({});
 
     useEffect(() => {
         findWidgetsForTopic(topicId)
@@ -26,7 +28,7 @@ const WidgetList = (
             <i onClick={()=> createWidget(topicId)} className="fas fa-plus fa-2x float-right"/>
             <ul className="list-group">
                 {
-                    widgets.map(widget =>
+                    widgets && widgets.map(widget =>
                         <li className="list-group-item" key={widget.id}>
                             {
                                 widget.type === "HEADING" &&
@@ -39,6 +41,22 @@ const WidgetList = (
                             {
                                 widget.type === "PARAGRAPH" &&
                                 <ParagraphWidget
+                                    widget={widget}
+                                    widgetToUpdate = {updateWidget}
+                                    widgetToDelete = {deleteWidget}
+                                />
+                            }
+                            {
+                                widget.type === "LIST" &&
+                                <ListWidget
+                                    widget={widget}
+                                    widgetToUpdate = {updateWidget}
+                                    widgetToDelete = {deleteWidget}
+                                />
+                            }
+                            {
+                                widget.type === "IMAGE" &&
+                                <ImageWidget
                                     widget={widget}
                                     widgetToUpdate = {updateWidget}
                                     widgetToDelete = {deleteWidget}
@@ -67,7 +85,8 @@ const dtpm = (dispatch) => ({
             }))
     },
     createWidget: (topicId) => {
-        widgetService.createWidget(topicId, {type: "HEADING", size: 1, text: "New Widget"})
+        widgetService.createWidget(topicId, {type: "HEADING", size: 1, text: "New Widget", widgetOrder:0,
+            height: 0, width: 0, src: ''})
             .then(widget => dispatch({
                 type: "CREATE_WIDGET",
                 widget: widget
