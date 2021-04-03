@@ -18,12 +18,6 @@ const WidgetList = (
     const {layout,courseId,moduleId,lessonId,topicId} = useParams()
     //const [editingWidget, setEditingWidget] = useState({});
 
-    useEffect(() => {
-        if (topicId !== 'undefined' && typeof topicId !== 'undefined') {
-            findWidgetsForTopic(topicId)
-        }
-    }, [topicId])
-
     return(
         <div>
             <i onClick={()=> createWidget(topicId)} className="fas fa-plus fa-2x float-right"/>

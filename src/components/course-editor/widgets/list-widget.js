@@ -1,6 +1,6 @@
 import React,{useState}from 'react'
 
-const ListWidget = ({widget, updateItem, deleteItem}) => {
+const ListWidget = ({widget, widgetToUpdate, widgetToDelete}) => {
     const [editingWidget, setEditingWidget] = useState({});
     const [widgetCache, setWidgetCache] = useState(widget);
 
@@ -10,15 +10,14 @@ const ListWidget = ({widget, updateItem, deleteItem}) => {
                 editingWidget.id === widget.id &&
                 <>
                     <i onClick={() => {
-                        updateItem(widgetCache)
+                        widgetToUpdate(widgetCache)
                         setEditingWidget({})
                     }} className="fas fa-2x fa-check float-right"/>
-                    <i onClick={() => deleteItem(widget)} className="fas fa-2x fa-trash float-right"/>
+                    <i onClick={() => widgetToDelete(widget)} className="fas fa-2x fa-trash float-right"/>
                     <input onChange={(e) =>
                         setWidgetCache({...widgetCache, widgetOrder: e.target.checked?1:0})}
-                           checked={widgetCache.widgetOrder === 1} type="checkbox">
-                        Ordered
-                    </input>
+                           checked={widgetCache.widgetOrder === 1} type="checkbox"/>
+                           Ordered
                     <br/>
                     <select className="col form-control"
                             value ={widgetCache.type}

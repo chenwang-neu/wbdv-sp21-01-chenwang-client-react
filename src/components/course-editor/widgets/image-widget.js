@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-const ImageWidget = ({widget, updateItem, deleteItem}) =>
+const ImageWidget = ({widget, widgetToUpdate, widgetToDelete}) =>
 {
     const [editingWidget, setEditingWidget] = useState({});
     const [widgetCache, setWidgetCache] = useState(widget);
@@ -10,10 +10,10 @@ const ImageWidget = ({widget, updateItem, deleteItem}) =>
                 editingWidget.id === widget.id &&
                 <>
                     <i onClick={() => {
-                        updateItem(widgetCache)
+                        widgetToUpdate(widgetCache)
                         setEditingWidget({})
                     }} className="fas fa-2x fa-check float-right"/>
-                    <i onClick={() => deleteItem(widget)} className="fas fa-2x fa-trash float-right"/>
+                    <i onClick={() => widgetToDelete(widget)} className="fas fa-2x fa-trash float-right"/>
                     <select className="col form-control"
                             value ={widgetCache.type}
                             onChange={(e) =>
