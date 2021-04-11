@@ -19,6 +19,9 @@ export default class CourseTable
                             <th>Title</th>
                             <th className="d-none d-md-table-cell">Owned by</th>
                             <th className="d-none d-lg-table-cell">Last modified</th>
+                            <th className="d-none d-lg-table-cell">
+                                Quizzes
+                            </th>
                             <th>
                                 <div className="table-button float-right">
                                     <i className="p-1 fas fa-folder color-black"/>

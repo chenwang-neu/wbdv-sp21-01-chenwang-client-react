@@ -6,6 +6,8 @@ import {Route} from "react-router-dom";
 import courseService from "../services/course-service";
 import CourseNavigation from "./course-navigation";
 import './components.style.client.css';
+import QuizzesList from "./quizzes/quizzes-list";
+import Quiz from "./quizzes/quiz";
 
 class CourseManager extends React.Component {
     state = {
@@ -86,6 +88,12 @@ class CourseManager extends React.Component {
                 ]}
                        exact={true}
                        render={(props) => <CourseEditor {...props}/>}>
+                </Route>
+                <Route path = '/courses/:courseId/quizzes' exact = {true}>
+                    <QuizzesList />
+                </Route>
+                <Route path = '/courses/:courseId/quizzes/:quizId' exact = {true}>
+                    <Quiz />
                 </Route>
             </div>
         )
