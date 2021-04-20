@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 
-const TrueFalseQuestion = ({question}) => {
+const TrueFalseQuestion = ({question,  graded}) => {
     const [answer, setAnswer] = useState('')
-    const [graded, setGrade] = useState(false)
+    //const [graded, setGrade] = useState(false)
 
     return (
         <div>
@@ -33,10 +33,10 @@ const TrueFalseQuestion = ({question}) => {
                 </label>
             </ul>
             <h6>Your Answer: {answer}</h6>
-            <button onClick = {() => setGrade(true)}
-                disabled={graded} className = 'btn btn-primary'>
-                Grade
-            </button>
+            {/*<button onClick = {() => setGrade(true)}*/}
+            {/*    disabled={graded} className = 'btn btn-primary'>*/}
+            {/*    Grade*/}
+            {/*</button>*/}
         </div>
     )
 }
